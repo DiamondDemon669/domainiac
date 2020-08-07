@@ -23,7 +23,11 @@ $nameserverfile = fopen("nameserver.txt", "a+");
 $nameserverlines = file("nameserver.txt");
 if (preg_match('/link/', $_POST["command"]) == 1) {
     $line = get_line_num('nameserver.txt', $_POST['content']);
-    echo $nameserverlines["$line"];
+    if ($nameserverlines["$line"] == false) {
+    	echo "Error: code not found in database";
+    } else {
+    	echo $nameserverlines["$line"];
+    }
 } else if (preg_match('/add/', $_POST["command"]) == 1) {
     $code = randomString($length = 6);
     $newdata = PHP_EOL . $_POST["content"] . ' ' . $code;
@@ -31,3 +35,4 @@ if (preg_match('/link/', $_POST["command"]) == 1) {
     echo $code;
 }
 ?>
+    
