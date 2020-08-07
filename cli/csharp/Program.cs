@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using static Hostedit;
 
 namespace domainiac
@@ -11,11 +11,13 @@ namespace domainiac
             if (args[0] == "link")
             {
                 string entry = api.GetLink(args[1]);
-                ModifyHostsFile(entry);
+                string[] list = entry.Split(' ');
+                String fentry = list[1] + " " + list[0];
+                ModifyHostsFile(fentry);
             }
             if (args[0] == "add")
             {
-                String entry = args[1] + args[3];
+                String entry = args[1] + " " + args[3];
                 string code = api.GetAdd(entry);
                 Console.WriteLine(code);
             }
