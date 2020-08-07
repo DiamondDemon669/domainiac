@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Net;
-
+using System.Collections.Specialized;
+using System.Text;
 
 public class API
 {
@@ -8,9 +9,10 @@ public class API
     {
         WebClient client = new WebClient();
         String url = "https://domainiac.diamonddemon.me/nameserver.php";
-        client.Headers[HttpRequestHeader.ContentType] = "application/form-data";
-        String data = "command=link&content=" + code;
-        String result = client.UploadString(url, data);
+        NameValueCollection data = new NameValueCollection();
+        data.Add("command", "link");
+        data.Add("content", code);
+        String result = Encoding.ASCII.GetString(client.UploadValues(url, data));
         client.Dispose();
         return result;
     }
@@ -18,11 +20,13 @@ public class API
     {
         WebClient client = new WebClient();
         String url = "https://domainiac.diamonddemon.me/nameserver.php";
-        client.Headers[HttpRequestHeader.ContentType] = "application/form-data";
-        String data = "command=add&content=" + entry;
-        String result = client.UploadString(url, data);
+        NameValueCollection data = new NameValueCollection();
+        data.Add("command", "add");
+        data.Add("content", entry);
+        String result = Encoding.ASCII.GetString(client.UploadValues(url, data));
         client.Dispose();
         return result;
     }
 }
 
+    
