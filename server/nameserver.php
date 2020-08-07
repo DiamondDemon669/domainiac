@@ -19,6 +19,11 @@ function randomString($length = 10) {
     }
     return $randomString;
 }
+function removeLine($text, $file) {
+    $line = get_line_num($file);
+    unset($file[$line]);
+    file_put_contents("file.txt", implode("", $file));
+}
 $nameserverfile = fopen("nameserver.txt", "a+");
 $nameserverlines = file("nameserver.txt");
 if (preg_match('/link/', $_POST["command"]) == 1) {
@@ -33,6 +38,11 @@ if (preg_match('/link/', $_POST["command"]) == 1) {
     $newdata = PHP_EOL . $_POST["content"] . ' ' . $code;
     fwrite($nameserverfile, $newdata);
     echo $code;
+}
+foreach ($nameserverlines as $line) {
+    if (strpos(file_get_contents("protected.txt"), $line) !== false) {
+        removeLine($line, $nameserverlines);
+    }
 }
 ?>
     
