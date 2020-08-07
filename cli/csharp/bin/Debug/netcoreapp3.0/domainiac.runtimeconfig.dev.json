@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\kysan\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\kysan\\.nuget\\packages"
+    ]
+  }
+}
