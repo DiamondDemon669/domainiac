@@ -12,7 +12,7 @@ Because the official cli is coded in python and csharp, all demonstrations will 
 
 import requests
 
-requests.post(url="https://domainiac.diamonddemon.me/nameserver.php", data={"command": "add", "content": DOMAIN + IP})
+result = requests.post(url="https://domainiac.diamonddemon.me/nameserver.php", data={"command": "add", "content": DOMAIN + IP}).text
 
 ```
 
@@ -22,7 +22,7 @@ requests.post(url="https://domainiac.diamonddemon.me/nameserver.php", data={"com
 
 import requests
 
-requests.post(url="https://domainiac.diamonddemon.me/nameserver.php", data={"command": "link", "content": CODE})
+result = requests.post(url="https://domainiac.diamonddemon.me/nameserver.php", data={"command": "link", "content": CODE}).text
 
 ```
 
@@ -71,6 +71,8 @@ Both C# examples require
 using system;
 
 using system.net;
+
+using system.text;
 
 ```
 
