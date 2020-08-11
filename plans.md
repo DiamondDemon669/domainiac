@@ -2,7 +2,7 @@
 
 - ~~patched exploit~~
 
-- added IP filter
+- add delete command
 
 - make error handling on C# edition
 
