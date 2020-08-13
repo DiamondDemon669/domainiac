@@ -2,7 +2,7 @@
 
 - ~~patched exploit~~
 
-- add delete command
+- ~~add delete command~~
 
-- make error handling on C# edition
+- ~~make error handling on C# edition~~
 
