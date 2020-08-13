@@ -26,6 +26,16 @@ result = requests.post(url="https://domainiac.diamonddemon.me/nameserver.php", d
 
 ```
 
+### deleting a record from the server
+
+```python
+
+import requests
+
+result = requests.post(url="https://domainiac.diamonddemon.me/nameserver.php", data={"command": "delete", "content": DELETECODE}).text
+
+```
+
 ## csharp
 
 ### adding a new record to the server
@@ -64,7 +74,25 @@ public string GetLink(string code)
 
 ```
 
-Both C# examples require 
+### deleting a record from the server
+
+```csharp
+
+public string GetDelete(string delcode)
+{
+    WebClient client = new WebClient();
+    String url = "https://domainiac.diamonddemon.me/nameserver.php";
+    NameValueCollection data = new NameValueCollection();
+    data.Add("command", "delete");
+    data.Add("content", delcode);
+    String result = Encoding.ASCII.GetString(client.UploadValues(url, data));
+    client.Dispose();
+    return result;
+}
+
+```
+
+All C# examples require 
 
 ```csharp
 
