@@ -27,6 +27,19 @@ public class API
         client.Dispose();
         return result;
     }
+    public string GetDelete(string delcode)
+    {
+        WebClient client = new WebClient();
+        String url = "https://domainiac.diamonddemon.me/nameserver.php";
+        NameValueCollection data = new NameValueCollection();
+        data.Add("command", "delete");
+        data.Add("content", delcode);
+        String result = Encoding.ASCII.GetString(client.UploadValues(url, data));
+        client.Dispose();
+        return result;
+    }
 }
+
+
 
     
