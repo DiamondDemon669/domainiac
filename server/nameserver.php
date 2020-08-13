@@ -24,10 +24,11 @@ function removeLine($text, $file) {
     unset($file[$line]);
     file_put_contents("file.txt", implode("", $file));
 }
-$nameserverfile = fopen("nameserver.txt", "a+");
-$nameserverlines = file("nameserver.txt");
+$nameserverfile = fopen("nameserver.nsf", "a+");
+$nameserverlines = file("nameserver.nsf");
+$explodedcontent = explode(" ", $_POST["content"]);
 if (preg_match('/link/', $_POST["command"]) == 1) {
-    $line = get_line_num('nameserver.txt', $_POST['content']);
+    $line = get_line_num('nameserver.nsf', $_POST['content']);
     if ($nameserverlines["$line"] == false) {
     	echo "Error: code not found in database";
     } else {
@@ -35,9 +36,27 @@ if (preg_match('/link/', $_POST["command"]) == 1) {
     }
 } else if (preg_match('/add/', $_POST["command"]) == 1) {
     $code = randomString($length = 6);
-    $newdata = PHP_EOL . $_POST["content"] . ' ' . $code;
-    fwrite($nameserverfile, $newdata);
-    echo $code;
+    $delcode = randomString($legnth = 8);
+    $newdata = PHP_EOL . $_POST["content"] . ' ' . $code . " " . $delcode;
+    if (substr_count($_POST["content"], " ") == 1) {
+        if (filter_var($explodedcontent[1], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) == $explodedcontent[1]) {
+            fwrite($nameserverfile, $newdata);
+            echo $code;
+        } else {
+            echo "Error: failed to bypass filter";
+        }
+    } else {
+        echo "Error: failed to bypass filter";
+    }
+} else if (preg_match('/delete/', $_POST["command"]) == 1) {
+    $line = get_line_num("nameserver.nsf", $_POST["content"]);
+    $eline = explode(" ", $nameserverlines["$line"]);
+    if ($_POST["content"] == $eline[3]) {
+        removeLine($nameserverlines["$line"], $nameserverlines);
+        echo "Deleted!";
+    } else {
+        echo "Error: code not found in database";
+    }
 }
 foreach ($nameserverlines as $line) {
     if (strpos(file_get_contents("protected.txt"), $line) !== false) {
@@ -45,4 +64,3 @@ foreach ($nameserverlines as $line) {
     }
 }
 ?>
-    
