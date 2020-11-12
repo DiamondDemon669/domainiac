@@ -1,5 +1,8 @@
 # domainiac
 
+## Domainiac has been given a COMPLETE overhaul
+## You will be seeing updates here shortly
+
 Domainiac is a selective nameserver meaning that you choose what domains you want to look at
 
 you can get the CLI here as well as the PHP server code
